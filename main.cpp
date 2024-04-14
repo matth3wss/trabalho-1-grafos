@@ -34,10 +34,6 @@ int main() {
         vector<string> operacao = splitString(line);
         string opcao = operacao[0];
 
-        for (auto j : operacao) {
-            cout << "";
-        }
-
         if (opcao == "I") {
             Aresta a(stoi(operacao[1]), stoi(operacao[2]));
             g.insere_aresta(a);

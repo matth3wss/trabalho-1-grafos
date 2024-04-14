@@ -44,7 +44,7 @@ bool Grafo::tem_aresta(Aresta e){
 }
 
 void Grafo::insere_aresta(Aresta e){
-    if (!tem_aresta(e)) {
+    if (!tem_aresta(e) && e.vertice1 != e.vertice2){
         vetores[e.vertice1].push_back(e.vertice2);
         vetores[e.vertice2].push_back(e.vertice1);
         num_arestas_++;

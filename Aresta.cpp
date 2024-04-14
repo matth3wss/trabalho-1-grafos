@@ -8,9 +8,4 @@ Aresta::Aresta(int vertice1, int vertice2) : vertice1(vertice1), vertice2(vertic
         throw(invalid_argument("Erro no construtor Aresta(int, int): os vertices " +
             to_string(vertice1) + " e " + to_string(vertice2) + " sao invalidos!"));
     }
-    if (vertice1_ == vertice2_) {
-        throw(invalid_argument("Erro no construtor Aresta(int, int): os vertices " +
-        to_string(vertice1_) + " e " + to_string(vertice2_) + " são iguais!"));
-    }
-
 }  

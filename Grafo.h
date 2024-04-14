@@ -20,7 +20,7 @@ private:
     int num_vertices_;
     int num_arestas_;
 
-    std::vector<std::vector<int>> matriz_adj_;
+    std::vector<std::list<int>> vetores;
     
 };
 

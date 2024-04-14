@@ -4,7 +4,7 @@
 
 using namespace std;
 
-vector<vector<int>> matriz_adj_;
+vector<list<int>> matriz_adj_;
 
 Grafo::Grafo(int num_vertices) {
     if (num_vertices <= 0) {
@@ -15,13 +15,15 @@ Grafo::Grafo(int num_vertices) {
     num_vertices = num_vertices;
     num_arestas_ = 0;
 
-    matriz_adj_.resize(num_vertices);
+    vetores.resize(num_vertices);
 
-    for (int i = 0; i < num_vertices; i++) { // ou i < matriz_adj_.size()
-        matriz_adj_[i].resize(num_vertices, 0);
+    for (int i = 0; i < num_vertices; i++) {
+        for(auto j: vetores[i]){
+            cout << j << " ";
+        } 
     }
 }
-
+    
 int Grafo::num_vertices() {
     return num_vertices_;
 }
@@ -31,23 +33,26 @@ int Grafo::num_arestas() {
 }
 
 bool Grafo::tem_aresta(Aresta e){
-    return matriz_adj_[e.vertice1][e.vertice2] == 1;
+    for (auto j : vetores[e.vertice1]){
+        if (j == e.vertice2){
+            return true;
+        }
+    }
+    return false;
 }
 
 void Grafo::insere_aresta(Aresta e){
     if (!tem_aresta(e)) {
-        matriz_adj_[e.vertice1][e.vertice2] = 1;
-        matriz_adj_[e.vertice2][e.vertice1] = 1;
-
+        vetores[e.vertice1].push_back(e.vertice2);
+        vetores[e.vertice2].push_back(e.vertice1);
         num_arestas_++;
     }
 }
 
 void Grafo::remove_aresta(Aresta e){
         if (!tem_aresta(e)) {
-        matriz_adj_[e.vertice1][e.vertice2] = 0;
-        matriz_adj_[e.vertice2][e.vertice1] = 0;
-
+        vetores[e.vertice1].remove(e.vertice2);
+        vetores[e.vertice2].remove(e.vertice1);
         num_arestas_--;
     }
 }
@@ -55,11 +60,8 @@ void Grafo::remove_aresta(Aresta e){
 void Grafo::imprimir(){
     for (int i = 0; i < num_vertices_; i++) {
         cout << i << ": ";
-        for (int j = 0; j < num_vertices_; j++) {
-            // if (matriz_adj_[i][j] != 0) {
-            //     cout << " " << j;
-            // }
-            cout << " " << matriz_adj_[i][j];
+        for (auto j : vetores[i]){
+            cout << j << " ";
         }
         cout << endl;
     }
